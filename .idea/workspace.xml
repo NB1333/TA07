@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ff2c9f6-387e-4d46-8cdd-5adca6ac457e" name="Changes" comment="almost ready">
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TimeTest.java" afterDir="false" />
+    <list default="true" id="1ff2c9f6-387e-4d46-8cdd-5adca6ac457e" name="Changes" comment="99% ready">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TA07.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TA07.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BTreeNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TimeTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +47,7 @@
     "WebServerToolWindowFactoryState": "false"
   }
 }]]></component>
-  <component name="RunManager" selected="TestNG.TimeTest">
+  <component name="RunManager" selected="Application.BTree">
     <configuration name="BTree" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TA07" />
@@ -102,7 +100,7 @@
       <updated>1652928117212</updated>
       <workItem from="1652928118438" duration="73000" />
       <workItem from="1652928232400" duration="2972000" />
-      <workItem from="1652960809023" duration="5506000" />
+      <workItem from="1652960809023" duration="7557000" />
     </task>
     <task id="LOCAL-00001" summary="almost ready">
       <created>1652962402071</created>
@@ -111,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652962402071</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="99% ready">
+      <created>1652966913265</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652966913265</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +135,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="almost ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="almost ready" />
+    <MESSAGE value="99% ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="99% ready" />
   </component>
 </project>

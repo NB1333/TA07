@@ -7,14 +7,16 @@ public class BTree {
         this.MinDeg = deg;
     }
 
-    public void traverse() {
+    public void print() {
         if (root != null) {
-            root.traverse();
+            root.print();
         }
     }
 
-    public BTreeNode search(int key) {
-        return root == null ? null : root.search(key);
+    public void search(int key) {
+        if (root != null) {
+            root.search(key);
+        }
     }
 
     public void insert(int key) {
