@@ -18,93 +18,93 @@ public class BTreeNode {
 
     public int findKey(int key) {
 
-        int idx = 0;
-        while (idx < num && keys[idx] < key)
-            ++idx;
-        return idx;
+        int index = 0;
+        while (index < num && keys[index] < key)
+            ++index;
+        return index;
     }
 
     public void remove(int key) {
 
-        int idx = findKey(key);
-        if (idx < num && keys[idx] == key) {
+        int index = findKey(key);
+        if (index < num && keys[index] == key) {
             if (isLeaf)
-                removeFromLeaf(idx);
+                removeFromLeaf(index);
             else
-                removeFromNonLeaf(idx);
+                removeFromNonLeaf(index);
         } else {
             if (isLeaf) {
                 //System.out.printf("The key %d is does not exist in the tree\n", key);
                 return;
             }
 
-            boolean flag = idx == num;
+            boolean flag = index == num;
 
-            if (children[idx].num < MinDeg)
-                fill(idx);
+            if (children[index].num < MinDeg)
+                fill(index);
 
-            if (flag && idx > num)
-                children[idx - 1].remove(key);
+            if (flag && index > num)
+                children[index - 1].remove(key);
             else
-                children[idx].remove(key);
+                children[index].remove(key);
         }
     }
 
-    public void removeFromLeaf(int idx) {
-        if (num - (idx + 1) >= 0)
-            System.arraycopy(keys, idx + 1, keys, idx + 1 - 1, num - (idx + 1));
+    public void removeFromLeaf(int index) {
+        if (num - (index + 1) >= 0)
+            System.arraycopy(keys, index + 1, keys, index + 1 - 1, num - (index + 1));
         num--;
     }
 
-    public void removeFromNonLeaf(int idx) {
+    public void removeFromNonLeaf(int index) {
 
-        int key = keys[idx];
+        int key = keys[index];
 
-        if (children[idx].num >= MinDeg) {
-            int pred = getPred(idx);
-            keys[idx] = pred;
-            children[idx].remove(pred);
+        if (children[index].num >= MinDeg) {
+            int pred = getPred(index);
+            keys[index] = pred;
+            children[index].remove(pred);
         }
-        else if (children[idx + 1].num >= MinDeg) {
-            int succ = getSucc(idx);
-            keys[idx] = succ;
-            children[idx + 1].remove(succ);
+        else if (children[index + 1].num >= MinDeg) {
+            int succ = getSucc(index);
+            keys[index] = succ;
+            children[index + 1].remove(succ);
         } else {
-            merge(idx);
-            children[idx].remove(key);
+            merge(index);
+            children[index].remove(key);
         }
     }
 
-    public int getPred(int idx) {
-        BTreeNode cur = children[idx];
+    public int getPred(int index) {
+        BTreeNode cur = children[index];
         while (!cur.isLeaf)
             cur = cur.children[cur.num];
         return cur.keys[cur.num - 1];
     }
 
-    public int getSucc(int idx) {
-        BTreeNode cur = children[idx + 1];
+    public int getSucc(int index) {
+        BTreeNode cur = children[index + 1];
         while (!cur.isLeaf)
             cur = cur.children[0];
         return cur.keys[0];
     }
 
-    public void fill(int idx) {
-        if (idx != 0 && children[idx - 1].num >= MinDeg)
-            borrowFromPrev(idx);
-        else if (idx != num && children[idx + 1].num >= MinDeg)
-            borrowFromNext(idx);
+    public void fill(int index) {
+        if (index != 0 && children[index - 1].num >= MinDeg)
+            borrowFromPrev(index);
+        else if (index != num && children[index + 1].num >= MinDeg)
+            borrowFromNext(index);
         else {
-            if (idx != num)
-                merge(idx);
+            if (index != num)
+                merge(index);
             else
-                merge(idx - 1);
+                merge(index - 1);
         }
     }
-    public void borrowFromPrev(int idx) {
+    public void borrowFromPrev(int index) {
 
-        BTreeNode child = children[idx];
-        BTreeNode sibling = children[idx - 1];
+        BTreeNode child = children[index];
+        BTreeNode sibling = children[index - 1];
 
         if (child.num - 1 + 1 >= 0)
             System.arraycopy(child.keys, 0, child.keys, 1, child.num - 1 + 1);
@@ -114,26 +114,26 @@ public class BTreeNode {
                 System.arraycopy(child.children, 0, child.children, 1, child.num + 1);
         }
 
-        child.keys[0] = keys[idx - 1];
+        child.keys[0] = keys[index - 1];
         if (!child.isLeaf)
             child.children[0] = sibling.children[sibling.num];
 
-        keys[idx - 1] = sibling.keys[sibling.num - 1];
+        keys[index - 1] = sibling.keys[sibling.num - 1];
         child.num += 1;
         sibling.num -= 1;
     }
 
-    public void borrowFromNext(int idx) {
+    public void borrowFromNext(int index) {
 
-        BTreeNode child = children[idx];
-        BTreeNode sibling = children[idx + 1];
+        BTreeNode child = children[index];
+        BTreeNode sibling = children[index + 1];
 
-        child.keys[child.num] = keys[idx];
+        child.keys[child.num] = keys[index];
 
         if (!child.isLeaf)
             child.children[child.num + 1] = sibling.children[0];
 
-        keys[idx] = sibling.keys[0];
+        keys[index] = sibling.keys[0];
 
         if (sibling.num - 1 >= 0)
             System.arraycopy(sibling.keys, 1, sibling.keys, 0, sibling.num - 1);
@@ -146,12 +146,12 @@ public class BTreeNode {
         sibling.num -= 1;
     }
 
-    public void merge(int idx) {
+    public void merge(int index) {
 
-        BTreeNode child = children[idx];
-        BTreeNode sibling = children[idx + 1];
+        BTreeNode child = children[index];
+        BTreeNode sibling = children[index + 1];
 
-        child.keys[MinDeg - 1] = keys[idx];
+        child.keys[MinDeg - 1] = keys[index];
 
         if (sibling.num >= 0)
             System.arraycopy(sibling.keys, 0, child.keys, MinDeg, sibling.num);
@@ -161,10 +161,10 @@ public class BTreeNode {
                 System.arraycopy(sibling.children, 0, child.children, MinDeg, sibling.num + 1);
         }
 
-        if (num - (idx + 1) >= 0)
-            System.arraycopy(keys, idx + 1, keys, idx + 1 - 1, num - (idx + 1));
-        if (num + 1 - (idx + 2) >= 0)
-            System.arraycopy(children, idx + 2, children, idx + 2 - 1, num + 1 - (idx + 2));
+        if (num - (index + 1) >= 0)
+            System.arraycopy(keys, index + 1, keys, index + 1 - 1, num - (index + 1));
+        if (num + 1 - (index + 2) >= 0)
+            System.arraycopy(children, index + 2, children, index + 2 - 1, num + 1 - (index + 2));
 
         child.num += sibling.num + 1;
         num--;
